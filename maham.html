@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> first class html </title>
+  <link rel="icon" type="image/png" href="https://images.app.goo.gl/d4ayUVmdJa2gpe5s8" />
+  <style>
+    label {
+      font-size: 20px;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    body {
+      color: chartreuse;
+      font-weight: 900;
+      margin: 0;
+      background-color: darkslategrey;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    #header {
+      background: red;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    #container {
+      display: flex;
+      position: relative;
+      flex: 1;
+    }
+
+    #sidebar {
+      background: pink;
+      width: 300px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    #main {
+      flex: 1;
+      padding: 20px;
+      box-sizing: border-box;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
+      gap: 20px;
+    }
+
+    .grid-item {
+      background: #fff;
+      color: #000;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #chatbox {
+      position: absolute;
+      width: 100px;
+      display: flex;
+      background-color: cornflowerblue;
+      border-radius: 100%;
+      z-index: 0;
+      bottom: 5%;
+      right: 5%;
+      z-index: 20;
+    }
+
+    #massagebox {
+      padding: 20px;
+    }
+
+    #massagebox:hover {
+      padding: 30px;
+    }
+
+    #fixeddiv {
+      position: fixed;
+      background-color: salmon;
+      display: flex;
+      border-radius: 100%;
+      width: 100px;
+      bottom: 5%;
+      height: 100px;
+      z-index: 21;
+    }
+
+    /* 
+      iimportant css properties
+      hieght 
+      width
+      margin
+      padding
+      display
+      position
+      let, top, bottom, right
+      links
+      table
+      icon
+      border
+      box
+      pseudo elements
+      align */
+  </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+  <div id="Header">
+    <h1>header</h1>
+  </div>
+  <div id="container">
+    <div id="chatbox">
+      <div id="messagebox">
+        <i></i>
+        Messages
+      </div>
+    </div>
+    <div id="sidebar">
+      <h1>sidebar</h1>
+    </div>
+    <div id="main">
+      <div id="fixedDiv">
+
+      </div>
+    </div>
+    <div class="grid-item">
+      <h1>Testing</h1>
+      <p>this our first class for the introduction of HTML</p>
+      <a href="https://www.w3schools.com">Visit W3Schools.com!</a>
+      <a href="https://www.w3schools.com" target="_blank">Visit W3Schools.com!</a>
+      <a href="javascript:alert('Hello World!');">Execute JavaScript</a>
+      <hr />
+      <form>
+        <label>First Name</label>
+        <input type="text" name="firstName" />
+        <label>Phone</label>
+        <input type="number" name="phone" />
+        <button type="submit"
+          style="background-color: blue; color: white; padding: 10px; border: none; border-radius: 5px;">Submit</button>
+        <button type="reset"
+          style="background-color: red; color: white; padding: 10px; border: none; border-radius: 5px;">Reset</button>
+        <form>
+    </div>
+  </div>
+  <div class="grid-item">
+    <h1>Testing</h1>
+    <p>this our first class for the introduction of HTML</p>
+    <a href="https://www.w3schools.com">Visit W3Schools.com!</a>
+    <a href="https://www.w3schools.com" target="_blank">Visit W3Schools.com!</a>
+    <a href="javascript:alert('Hello World!');">Execute JavaScript</a>
+    <hr />
+    <form>
+      <label>First Name</label>
+      <input type="text" name="firstName" />
+      <label>Phone</label>
+      <input type="number" name="phone" />
+      <button type="submit"
+        style="background-color: blue; color: white; padding: 10px; border: none; border-radius: 5px;">Submit</button>
+      <button type="reset"
+        style="background-color: red; color: white; padding: 10px; border: none; border-radius: 5px;">Reset</button>
+      <form>
+  </div>
+  </div>
+  <div class="grid-item">
+    <h1>Testing</h1>
+    <p>this our first class for the introduction of HTML</p>
+    <a href="https://www.w3schools.com">Visit W3Schools.com!</a>
+    <a href="https://www.w3schools.com" target="_blank">Visit W3Schools.com!</a>
+    <a href="javascript:alert('Hello World!');">Execute JavaScript</a>
+    <hr />
+    <form>
+      <label>First Name</label>
+      <input type="text" name="firstName" />
+      <label>Phone</label>
+      <input type="number" name="phone" />
+      <button type="submit"
+        style="background-color: blue; color: white; padding: 10px; border: none; border-radius: 5px;">Submit</button>
+      <button type="reset"
+        style="background-color: red; color: white; padding: 10px; border: none; border-radius: 5px;">Reset</button>
+      <form>
+  </div>
+  </div>
+  <div class="grid-item">
+    <h1>Testing</h1>
+    <p>this our first class for the introduction of HTML</p>
+    <a href="https://www.w3schools.com">Visit W3Schools.com!</a>
+    <a href="https://www.w3schools.com" target="_blank">Visit W3Schools.com!</a>
+    <a href="javascript:alert('Hello World!');">Execute JavaScript</a>
+    <hr />
+    <form>
+      <label>First Name</label>
+      <input type="text" name="firstName" />
+      <label>Phone</label>
+      <input type="number" name="phone" />
+      <button type="submit"
+        style="background-color: blue; color: white; padding: 10px; border: none; border-radius: 5px;">Submit</button>
+      <button type="reset"
+        style="background-color: red; color: white; padding: 10px; border: none; border-radius: 5px;">Reset</button>
+      <form>
+
+
+        <!--add more grid items as needed-->
+  </div>
+  </div>
+</body>
+<script>
+  // responsibilities takers
+  // global - public 
+  // functional - private 
+  var firstName = "maham khan"; //variable 
+  let lastName = "wajid hussain";
+  const age = "18";
+
+  console.log(firstName, lastName, age);
+  // logic creators
+  // if 
+  // else if
+  // else
+  // logic operators
+  // == equals to
+  // || or
+  // && and 
+  if (firstName == "maham khan") {
+    console.log("all good");
+
+  }
+  // functions
+  //()
+  // call / execute
+  var name = bringfullname();
+  console.log("*****happy weekend*****");
+  console.log(name);
+  function bringFullName() {
+    // below debugger use for debugger the website
+
+  }
+</script>
+
+</html>
