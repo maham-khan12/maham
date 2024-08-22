@@ -1,33 +1,102 @@
 <html>
 <head>
-    <title>First Class Html || GPT</title>
-    <link rel='icon' type='image/png' href='simple-twitter-16x16-icon-png-7.png' />
-    <link rel='stylesheet' href='maham.css' />
-    <style>
-        .discount-price {
-            text-decoration: line-through;
-            color: red;
+    <title>First Class Html</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="tailwindcss.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'blue': {
+                            DEFAULT: '#353887',
+                            50: '#9C9ED8',
+                            100: '#8D90D2',
+                            200: '#7073C7',
+                            300: '#5256BB',
+                            400: '#4144A4',
+                            500: '#353887',
+                            600: '#25275F',
+                            700: '#151736',
+                            800: '#06060E',
+                            900: '#000000',
+                            950: '#000000'
+                        },
+                        'red': {
+                            DEFAULT: '#CF2E39',
+                            50: '#FEFBFB',
+                            100: '#F9E4E6',
+                            200: '#EFB6BA',
+                            300: '#E5898F',
+                            400: '#DA5B63',
+                            500: '#CF2E39',
+                            600: '#A9262F',
+                            700: '#841D24',
+                            800: '#5E151A',
+                            900: '#390D10',
+                            950: '#26080A'
+                        },
+                        'white': {
+                            DEFAULT: '#E8E8E8',
+                            50: '#FFFFFF',
+                            100: '#FCFCFC',
+                            200: '#F7F7F7',
+                            300: '#F2F2F2',
+                            400: '#EDEDED',
+                            500: '#E8E8E8',
+                            600: '#CCCCCC',
+                            700: '#B0B0B0',
+                            800: '#949494',
+                            900: '#787878',
+                            950: '#6A6A6A'
+                        },
+                        'black': {
+                            DEFAULT: '#0F0F0F',
+                            50: '#6B6B6B',
+                            100: '#616161',
+                            200: '#4D4D4D',
+                            300: '#383838',
+                            400: '#242424',
+                            500: '#0F0F0F',
+                            600: '#0A0A0A',
+                            700: '#050505',
+                            800: '#000000',
+                            900: '#000000',
+                            950: '#000000'
+                        },
+                        'seaGreen': {
+                            DEFAULT: '#31A24C',
+                            50: '#A6E4B5',
+                            100: '#97DFA8',
+                            200: '#77D68E',
+                            300: '#58CD74',
+                            400: '#3AC15B',
+                            500: '#31A24C',
+                            600: '#247738',
+                            700: '#174C24',
+                            800: '#0A210F',
+                            900: '#000000',
+                            950: '#000000'
+                        },
+                    }
+                }
+            }
         }
-        .actual-price {
-            color: green;
-        }
-        .paymentLabel {
-            display: flex;
-            align-items: center;
-        }
-    </style>
+    </script>
 </head>
-<body>
-    <div id='header' class='slideDown'>
-        <h1>Header</h1>
+
+<body class="bg-white-50 flex flex-col text-blue-900 h-svh">
+    <div class="bg-red-50 p-8">
+         <h1 class="text-blue-500 text-6x1">Header</h1>
     </div>
-    <div id='container'>
-        <div id='sidebar'>
-            <h1>Sidebar</h1>
+    <div id="container" class="flex grow flex-column">
+        <div class="w-72 box-border p-8 bg-red-100">
+            <h1 class="text-blue-400 text-2x1">Sidebar</h1>
         </div>
-        <div id='mainBox' style='display: flex; width: 100%; gap:10px'>
-            <div class='grid-item slideDown' style='width: 30%;'>
-                <form id='taskForm' onsubmit='event.preventDefault();' style='display: flex; flex-direction:column; gap: 4px; '>
+        <div id='mainBox' clas="flex w-full gap-4">
+            <div class='bg-white-500 text-black-500 p-4 rounded-md shadow-2x1 slideDown' style='width: 30%;'>
+                <form id='ecommerceForm' onsubmit='event.preventDefault();' style='display: flex; flex-direction:column; gap: 4px; '>
                     <label>Checkout Form</label>
                     <input type='text' name='first_name' required id='first_name' placeholder="Enter your first name"/>
                     <span style='color:red;' hidden id='taskErrorField-first_name'>This field is required</span>
