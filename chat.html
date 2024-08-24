@@ -346,6 +346,9 @@
             });
             cartDiv.innerHTML = cartHtml;
         }
+        function updateTotalAmount() {
+            document.getElementById('totalAmount').innerText = calculateTotalPrice().toFixed(2);
+        }
         function renderProducts() {
             let productHtml = '';
             var productDiv = document.getElementById('main');
@@ -355,42 +358,19 @@
                         `+ x.discounted_price + `
                     </div>` : `<div class='text-seaGreen-500'>
                         `+ x.price + `
-                    </div>` ;`
-            }
+                    </div>` ;
+                    productHtml += `<div class='bg-white-500 text-black-500 p-4 rounded-md shadow-2xl slideDown'>
+                    <h1 class='font-bold'>`+ x.name + `</h1>
+                    <p class='font-medium'>`+ x.description + `</p>
+                    `+ priceBox + `
+                    <div class=''>
+                        <input type='number' id='qty`+ x.id + `'/>
+                        <button class='bg-blue-400 text-white-200 font-medium rounded-lg w-32 py-1' onclick='addToCart(`+ x.id + `)'>Add to Cart</button>
 
-            )
-        }
-
-                <p>${x.name}</p>
-                <p>${x.description}</p>
-                <p><span class='discount-price'>$${x.price}</span> <span class='actual-price'>$${x.discounted_price}</span></p>
-                <p>Quantity: ${x.quantity}</p>
-                <p>Total: $${(x.discounted_price * x.quantity).toFixed(2)}</p>
-                <button type='button' onclick="removeItemCart(${x.id})" id='removeItemCart' style='background-color: red; color: white; padding: 10px; border: none; border-radius: 5px;'>Remove</button>
+                    </div>
                 </div>`;
             });
-            document.getElementById('boxList').innerHTML = cartHtml;
-        }
-
-        function updateTotalAmount() {
-            document.getElementById('totalAmount').innerText = calculateTotalPrice().toFixed(2);
-        }
-
-        function renderProducts() {
-            var html = '<div style="display: flex; flex-wrap: wrap; gap: 10px;">';
-            products.forEach((x) => {
-                html += `<div class="slideDown" style="border: 1px solid grey; padding: 10px; width: 30%; border-radius: 5px;">
-                <p>${x.name}</p>
-                <p>${x.description}</p>
-                <p><span class='discount-price'>$${x.price}</span> <span class='actual-price'>$${x.discounted_price}</span></p>
-                <div>
-                    <input type="number" id="qty${x.id}" min="1" style="width: 50px;" placeholder="Qty" />
-                    <button class='bg-blue-400 text-white-200 font-medium rounded-lg w-32 py-1' onclick="addToCart(${x.id})">Add to Cart</button>
-                </div>
-                </div>`;
-            });
-            html += '</div>';
-            document.getElementById('main').innerHTML = html;
-        }
+            productDiv.innerHTML = productHtml;
+        }               
     </script>
-</html>
+  </html>
