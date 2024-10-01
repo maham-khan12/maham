@@ -1,87 +1,62 @@
-// Array to store expenses
-let expenses = [];
+document.getElementById("add-expense").addEventListener("click", function () {
+  const date = document.getElementById("expense-date").value;
+  const name = document.getElementById("expense-name").value;
+  const amount = document.getElementById("expense-amount").value;
+  const category = document.getElementById("expense-category").value;
+  const description = document.getElementById("expense-description").value;
 
-// Select necessary DOM elements
-const addExpenseBtn = document.getElementById('add-expense-btn');
-const expenseTableBody = document.getElementById('expense-table-body');
-const subtotalElement = document.getElementById('subtotal'); // Element to display subtotal
+  if (date && name && amount && category && description) {
+    // Add the expense to the list
+    const expenseList = document.getElementById("expense-list");
+    const newRow = document.createElement("tr");
 
-// Function to add a new expense
-function addExpense() {
-    // Get input values
-    const date = document.getElementById('date').value;
-    const description = document.getElementById('description').value;
-    const category = document.getElementById('category').value;
-    const amount = document.getElementById('amount').value;
+    // Adding row with delete button
+    newRow.innerHTML = `
+      <td class="px-4 py-2">${date}</td>
+      <td class="px-4 py-2">${name}</td>
+      <td class="px-4 py-2">$<span class="amount">${amount}</span></td>
+      <td class="px-4 py-2">${category}</td>
+      <td class="px-4 py-2">${description}</td>
+      <td class="px-4 py-2">
+        <button class="delete-expense bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600">Delete</button>
+      </td>
+    `;
 
-    // Validate inputs
-    if (!date || !description || !amount) {
-        alert("Please fill in all fields.");
-        return;
-    }
+    expenseList.appendChild(newRow);
 
-    // Create a new expense object
-    const expense = {
-        date: date,
-        description: description,
-        category: category,
-        amount: parseFloat(amount).toFixed(2) // Format amount to 2 decimal places
-    };
-
-    // Add expense to the list
-    expenses.push(expense);
-
-    // Update the expense table and subtotal
-    updateTable();
-    updateSubtotal();
+    // Update the subtotal
+    updateSubtotal(Number(amount));
 
     // Clear input fields
-    document.getElementById('date').value = '';
-    document.getElementById('description').value = '';
-    document.getElementById('amount').value = '';
-}
+    document.getElementById("expense-date").value = '';
+    document.getElementById("expense-name").value = '';
+    document.getElementById("expense-amount").value = '';
+    document.getElementById("expense-category").value = 'Food';
+    document.getElementById("expense-description").value = '';
 
-// Function to update the table with the latest expenses
-function updateTable() {
-    // Clear existing rows
-    expenseTableBody.innerHTML = '';
-
-    // Loop through expenses and create a row for each
-    expenses.forEach((expense, index) => {
-        const row = document.createElement('tr');
-
-        row.innerHTML = `
-            <td class="p-2 border-b border-gray-700">${expense.date}</td>
-            <td class="p-2 border-b border-gray-700">${expense.description}</td>
-            <td class="p-2 border-b border-gray-700">${expense.category}</td>
-            <td class="p-2 border-b border-gray-700">$${expense.amount}</td>
-            <td class="p-2 border-b border-gray-700">
-                <button class="text-red-500 hover:text-red-400 delete-btn" onclick="deleteExpense(${index})">Delete</button>
-            </td>
-        `;
-
-        // Append the row to the table body
-        expenseTableBody.appendChild(row);
+    // Add delete functionality
+    newRow.querySelector(".delete-expense").addEventListener("click", function () {
+      const amountToRemove = Number(newRow.querySelector(".amount").innerText);
+      removeExpense(newRow, amountToRemove);
     });
+
+  } else {
+    alert("Please fill in all fields.");
+  }
+});
+
+let subtotal = 0;
+
+function updateSubtotal(amount) {
+  subtotal += amount;
+  document.getElementById("subtotal").innerText = subtotal.toFixed(2);
 }
 
-// Function to delete an expense by index
-function deleteExpense(index) {
-    // Remove the expense from the array
-    expenses.splice(index, 1);
-
-    // Update the table and subtotal to reflect the changes
-    updateTable();
-    updateSubtotal();
+function removeExpense(row, amount) {
+  // Remove the row
+  row.remove();
+  
+  // Update the subtotal
+  subtotal -= amount;
+  document.getElementById("subtotal").innerText = subtotal.toFixed(2);
 }
-
-// Function to update the subtotal of expenses
-function updateSubtotal() {
-    // Calculate the subtotal by summing all amounts
-    const subtotal = expenses.reduce((total, expense) => total + parseFloat(expense.amount), 0).toFixed(2);
-    // Display the subtotal
-    subtotalElement.textContent = `Subtotal: $${subtotal}`;
-}
-
-// Add event listener to the add expense button
-addExpenseBtn.addEventListener('click', addExpense);

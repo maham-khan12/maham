@@ -1,126 +1,67 @@
 <!DOCTYPE html>
-<html lang="en" #tracker-index.html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Expense Tracker</title>
-    <style>
-        
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background-color: #f4f7f8;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .input-group {
-            margin-bottom: 15px;
-        }
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .input-group input, .input-group select {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #c30f5d;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: #d10483;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .delete-btn {
-            color: #dc3545;
-            cursor: pointer;
-            border: none;
-            background: none;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker</title>
+  <script defer src="script.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
-        <h1>Expense Tracker</h1>
-        
-        <div class="input-group">
-            <label for="date">Date</label>
-            <input type="date" id="date">
-        </div>
-        <div class="input-group">
-            <label for="description">Description</label>
-            <input type="text" id="description" placeholder="Enter description">
-        </div>
-        <div class="input-group">
-            <label for="category">Category</label>
-            <select id="category">
-                <option value="Food">Food</option>
-                <option value="Transport">Transport</option>
-                <option value="Entertainment">Entertainment</option>
-                <option value="Utilities">Utilities</option>
-                <option value="Birthday">Birthday</option>
-                <option value="Uni fee">Uni fee</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
-        <div class="input-group">
-            <label for="amount">Amount</label>
-            <input type="number" id="amount" placeholder="Enter amount">
-        </div>
-        <button id="add-expense-btn">Add Expense</button>
+<body class="bg-gray-100 p-10">
 
+  <div class="max-w-lg mx-auto bg-white p-6 rounded-md shadow-md">
+    <h2 class="text-2xl font-bold mb-4">Expense Tracker</h2>
 
-        <table id="expense-table">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Amount</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-            </tbody>
-        </table>
-        <p id="subtotal" class="text-gray-300 font-semibold mt-4">Subtotal: $0.00</p>
+    <!-- Expense input form -->
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700">Date</label>
+      <input id="expense-date" class="w-full px-3 py-2 border rounded-md shadow-md focus:outline-none focus:ring focus:ring-indigo-200" type="date" />
     </div>
 
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700">Amount</label>
+      <input id="expense-amount" class="w-full px-3 py-2 border rounded-md shadow-md focus:outline-none focus:ring focus:ring-indigo-200" type="number" placeholder="Enter amount" />
+    </div>
 
-    <script src="script.js"></script>
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700">Category</label>
+      <select id="expense-category" class="w-full px-3 py-2 border rounded-md shadow-md focus:outline-none focus:ring focus:ring-indigo-200">
+        <option value="Food">Food</option>
+        <option value="Transport">Transport</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Others">Others</option>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700">Description</label>
+      <textarea id="expense-description" class="w-full px-3 py-2 border rounded-md shadow-md :outline-none focus:ring focus:ring-indigo-200" rows="2" placeholder="Enter description"></textarea>
+    </div>
+
+    <button id="add-expense" class="bg-pink-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-pink-700">Add Expense</button>
+
+    <!-- Expense Table -->
+    <table class="min-w-full mt-6 bg-white rounded-md">
+      <thead>
+        <tr>
+          <th class="text-left px-4 py-2">Date</th>
+          <th class="text-left px-4 py-2">Amount</th>
+          <th class="text-left px-4 py-2">Category</th>
+          <th class="text-left px-4 py-2">Description</th>
+          <th class="text-left px-4 py-2">Delete</th>
+        </tr>
+      </thead>
+      <tbody id="expense-list" class="divide-y divide-gray-200">
+        <!-- Dynamic content goes here -->
+      </tbody>
+    </table>
+
+    <!-- Subtotal -->
+    <div class="mt-6 text-lg">
+      <strong>Subtotal: $</strong><span id="subtotal">0</span>
+    </div>
+  </div>
+
 </body>
 </html>
