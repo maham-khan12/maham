@@ -1,0 +1,236 @@
+<html>
+  <head>
+    <title>Vue Class work</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="vue.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              pink: {
+                DEFAULT: "#D6336C",
+                50: "#FDE5EE",
+                100: "#FBCBD6",
+                200: "#F78AAA",
+                300: "#F2497F",
+                400: "#EC1853",
+                500: "#D6336C",
+                600: "#AC2754",
+                700: "#811A3C",
+                800: "#570E24",
+                900: "#2D020C",
+                950: "#1A0005",
+              },
+              white: {
+                DEFAULT: "#E8E8E8",
+              },
+              black: {
+                DEFAULT: "#0F0F0F",
+              },
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body id="app" class="bg-white text-black">
+    <div class="bg-pink-500 p-6 text-center">
+      <h1 class="text-3xl font-bold">{{ message }}</h1>
+      <button @click="changesMsg">change Me</button>
+    </div>
+    <div id="container" class="flex grow flex-column">
+      <div class="bg-pink-200 p-4 w-1/4">
+        <h1 class="text-xl font-semibold">Sidebar</h1>
+      </div>
+      <div id="mainBox" class="flex w-full gap-4">
+        <div class="bg-white-500 text-black-500 p-4 rounded-md shadow-2xl slideDown" style="width: 30%">
+          <form id="ecommerceForm" @submit.prevent="submitCheckout" class="flex flex-col gap-4 bg-gray-100 p-6 rounded-lg shadow-lg w-full">
+            <label>Checkout Form ( {{computedTotalCart}} )</label>
+            <input type="text" name="first_name" v-model="checkoutForm.first_name" required placeholder="Enter your first name" class="border border-gray-300 rounded-lg p-2" />
+            <input type="text" name="last_name" v-model="checkoutForm.last_name" required placeholder="Enter your last name" class="border border-gray-300 rounded-lg p-2" />
+            <input type="tel" name="number" v-model="checkoutForm.phone_number" required placeholder="Enter your phone number" class="border border-gray-300 rounded-lg p-2" />
+            <textarea v-model="checkoutForm.address" name="address" placeholder="Enter your full address" class="border border-gray-300 rounded-lg p-2"></textarea>
+            <input type="email" v-model="checkoutForm.email" name="email" required placeholder="Enter your email" class="border border-gray-300 rounded-lg p-2" />
+            <input type="text" name="postal_code" v-model="checkoutForm.postal_code" required placeholder="Enter your postal code" class="border border-gray-300 rounded-lg p-2" />
+            <select v-model="checkoutForm.city" name="city" class="border border-gray-300 rounded-lg p-2">
+              <option>Karachi</option>
+              <option>Lahore</option>
+              <option>Islamabad</option>
+            </select>
+            <select v-model="checkoutForm.country" name="country" class="border border-gray-300 rounded-lg p-2">
+              <option>Pakistan</option>
+            </select>
+            <label class="flex items-center">
+              <input v-model="checkoutForm.payment_method" type="radio" value="Cash on Delivery" /> Cash on Delivery
+            </label>
+            <label class="flex items-center">
+              <input v-model="checkoutForm.payment_method" type="radio" value="Online Payment" /> Online Payment
+            </label>
+            <button type="submit" class="bg-pink-500 text-white p-2 rounded-lg hover:bg-pink-600 transition-all">Checkout</button>
+          </form>
+        </div>
+        <div class="box bg-red-50 font-medium text-pink-900">
+          <div v-for="(x, index) in checkoutForm.cart_details" :key="x.id">
+            <p>{{ x.name }}</p>
+            <div v-if="x.discounted_price < x.price">
+              <span class="text-red-600 line-through">{{ x.price }}</span> {{ x.discounted_price }}
+            </div>
+            <div v-else>{{ x.price }}</div>
+            <div>Quantity: {{ x.quantity }}</div>
+            <button class="text-red-500" @click="removeItemCart(x.id)">X</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="main" class="p-4 grid grid-cols-3 gap-4 grow border-box">
+                                                                                                                                                                           
+    </div>
+          <div v-for="(x, index) in products" :key="x.id" class="bg-white-500 text-black-500 p-4 rounded-md shadow-2xl slideDown">
+        <h1 class="font-bold">{{ x.name }}</h1>
+        <p class="font-medium">{{ x.description }}</p>
+        <div v-if="x.discounted_price < x.price">
+          <span class="text-red-600 line-through">{{ x.price }}</span> {{ x.discounted_price }}
+        </div>
+        <div v-else>{{ x.price }}</div>
+        <div>
+          <input type="number" :id="'qty' + x.id" />
+          <button class="bg-pink-400 text-white-200 font-medium rounded-lg w-32 py-1" @click="addToCart(x.id)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      const { createApp } = Vue;
+
+      createApp({
+        data() {
+          return {
+            products: [
+           {
+            id: 1,
+            name: 'Water Bottle',
+            description: 'Color: Blue, Size: Large',
+            price: 100,
+           discounted_price: 99,
+           },
+          {
+           id: 2,
+           name: 'Mouse',
+           description: 'Wired USB Port',
+           price: 250,
+           discounted_price: 199,
+           },
+          {
+           id: 3,
+           name: 'Watch',
+           description: 'Color: Black, Watch Type: Smart, Brand: Apple',
+           price: 5000,
+          discounted_price: 4999,
+          },
+          {
+         id: 4,
+         name: 'Infinix S23',
+        description: 'Color: Blue, Storage: 120GB, RAM: 2GB, Display: 6x4',
+        price: 25000,
+        discounted_price: 24999,
+        },
+        {
+        id: 5,
+       name: 'Shoes',
+       description: 'Size: 8, Color: Blue, Type: Sports Wear',
+       price: 3000,
+       discounted_price: 3000,
+        },
+      ],
+
+            initialCheckoutForm: {
+              first_name: "",
+              last_name: "",
+              phone_number: "",
+              address: "",
+              email: "",
+              postal_code: "",
+              city: "",
+              country: "",
+              payment_method: "",
+              cart_details: [],
+            },
+            checkoutForm: {
+              first_name: "",
+              last_name: "",
+              phone_number: "",
+              address: "",
+              email: "",
+              postal_code: "",
+              city: "",
+              country: "",
+              payment_method: "",
+              cart_details: [],
+            },
+            products: [
+              { id: 1, name: "Water Bottle", description: "Color: Blue", price: 100, discounted_price: 99 },
+              { id: 2, name: "Mouse", description: "Wired USB Port", price: 250, discounted_price: 199 },
+              { id: 3, name: "Watch", description: "Color: Black", price: 5000, discounted_price: 4999 },
+            ],
+            message: "Hello Vue!",
+          };
+        },
+        computed: {
+          computedTotalCart() {
+            return this.checkoutForm.cart_details.reduce((sum, item) => {
+              const price = item.discounted_price < item.price ? item.discounted_price : item.price;
+              return sum + price * item.quantity;
+            }, 0);
+          },
+        },
+        methods: {
+          validateFields() {
+            const requiredFields = ["first_name", "last_name", "address", "postal_code"];
+            for (const field of requiredFields) {
+              if (!this.checkoutForm[field]) {
+                alert(`${field} is required.`);
+                return false;
+              }
+            }
+            return true;
+          },
+          submitCheckout() {
+            if (this.checkoutForm.cart_details.length === 0) {
+              alert("Your cart is empty.");
+              return;
+            }
+            if (!this.validateFields()) {
+              return;
+            }
+            alert("Order submitted successfully!");
+            this.checkoutForm = { ...this.initialCheckoutForm };
+          },
+          addToCart(productId) {
+            const product = this.products.find((p) => p.id === productId);
+            const quantityInput = document.getElementById(`qty${product.id}`);
+            const quantity = parseInt(quantityInput.value);
+            if (isNaN(quantity) || quantity <= 0) {
+              alert("Please enter a valid quantity.");
+              return;
+            }
+            const cartItem = this.checkoutForm.cart_details.find((item) => item.id === product.id);
+            if (cartItem) {
+              cartItem.quantity += quantity;
+            } else {
+              this.checkoutForm.cart_details.push({ ...product, quantity });
+            }
+            quantityInput.value = "";
+          },
+          removeItemCart(productId) {
+            this.checkoutForm.cart_details = this.checkoutForm.cart_details.filter((item) => item.id !== productId);
+          },
+          changesMsg() {
+            this.message = this.message === "Hello Vue!" ? "VueJs Rocks!" : "Hello Vue!";
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
